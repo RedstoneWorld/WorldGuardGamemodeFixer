@@ -1,0 +1,8 @@
+name: WorldGuardGamemodeFixer
+main: de.redstoneworld.worldguardgamemodefixer.WorldGuardGamemodeFixer
+version: 0.0.1
+api-version: 1.17
+depend: [WorldGuard]
+description: The Plugin description here.
+authors: [RedstoneFuture]
+website: https://redstoneworld.de
