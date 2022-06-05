@@ -27,7 +27,7 @@ public class WorldGuardGamemodeFixer extends JavaPlugin {
 	public void onEnable() {
 		
         // register events
-        new MyEventListener(this);
+        new PlayerListener(this);
 
 		// save default config
 		// ...
@@ -56,11 +56,6 @@ public class WorldGuardGamemodeFixer extends JavaPlugin {
 			lang = lang.replace("%" + args[i] + "%", args[i + 1]);
 		}
 		return ChatColor.translateAlternateColorCodes('&', lang);
-	}
-	
-	boolean getBooleanOption(String key) {
-		String option = getConfig().getString("features." + key);
-		return Boolean.valueOf(option);
 	}
 	
 	@SuppressWarnings("deprecation")

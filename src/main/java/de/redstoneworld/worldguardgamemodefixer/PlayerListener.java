@@ -8,7 +8,7 @@ import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class MyEventListener implements Listener {
+public class PlayerListener implements Listener {
 
 	protected final WorldGuardGamemodeFixer plugin;
 	private Player player;
@@ -16,7 +16,7 @@ public class MyEventListener implements Listener {
 	// config options
 	// ...
 
-	public MyEventListener(WorldGuardGamemodeFixer plugin) {
+	public PlayerListener(WorldGuardGamemodeFixer plugin) {
 		this.plugin = plugin;
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
 
