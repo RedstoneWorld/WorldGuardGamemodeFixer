@@ -1,14 +1,14 @@
 /**
- *  This is a small plugin to update the gamemode of the
- *  player after a world change, if he is on a WorldGuard
- *  region with a separate gamemode flag. The gamemode is
- *  fetched from the region with the highest priority.
- *  It is executed after a few ticks delay during a
- *  world change.
- * 
+ * This is a small plugin to update the gamemode of the
+ * player after a world change, if he is on a WorldGuard
+ * region with a separate gamemode flag. The gamemode is
+ * fetched from the region with the highest priority.
+ * It is executed after a few ticks delay during a
+ * world change.
+ *
  * Permissions:
  * rwm.worldguardgamemodefixer.bypass
- *
+ * 
  * @author Robert Rauh alias RedstoneFuture
  */
 
