@@ -21,13 +21,13 @@ public class WorldGuardGamemodeFixer extends JavaPlugin {
 	GameModeFlagScanner scanner;
 	
 	public void onEnable() {
-		
-        // register events
-        new PlayerListener(this);
 
-		// save default config
+		// save default config and load config
 		// ...
-
+		
+		// register events
+		new PlayerListener(this);
+		
 		// initialize the gamemode flag scanner
 		scanner = new GameModeFlagScanner(this);
 		
