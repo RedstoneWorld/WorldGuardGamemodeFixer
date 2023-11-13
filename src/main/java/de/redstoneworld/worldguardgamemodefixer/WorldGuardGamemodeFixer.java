@@ -5,7 +5,7 @@
  * fetched from the region with the highest priority.
  * It is executed after a few ticks delay during a
  * world change.
- *
+ * 
  * Permissions:
  * rwm.worldguardgamemodefixer.bypass
  * 
@@ -19,6 +19,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class WorldGuardGamemodeFixer extends JavaPlugin {
 
 	GameModeFlagScanner scanner;
+	
 	
 	public void onEnable() {
 
