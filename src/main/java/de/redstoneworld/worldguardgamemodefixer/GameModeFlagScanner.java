@@ -4,11 +4,13 @@ import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldedit.bukkit.BukkitPlayer;
 import com.sk89q.worldedit.world.World;
 import com.sk89q.worldedit.world.gamemode.GameMode;
+import com.sk89q.worldedit.world.gamemode.GameModes;
+import com.sk89q.worldguard.LocalPlayer;
 import com.sk89q.worldguard.WorldGuard;
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.flags.Flags;
 import com.sk89q.worldguard.protection.managers.RegionManager;
-import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import org.bukkit.entity.Player;
 
 public class GameModeFlagScanner {
@@ -19,8 +21,15 @@ public class GameModeFlagScanner {
         this.plugin = plugin;
 
     }
-
-
+    
+    
+    /**
+     * This method returns the Bukkit GameMode resulting from the 
+     * WorldGuard flags based on the player and his position.
+     * 
+     * @param player (Player) the target player
+     * @return the final bukkit gamemode
+     */
     public static org.bukkit.GameMode getFinalGameMode(Player player) {
 
         if (hasBypassPermissions(player)) return null;
@@ -32,33 +41,29 @@ public class GameModeFlagScanner {
 
         // Was the world of WorldGuard detect?
         if (manager == null) return null;
-
+        
         // Get the set with all WorldGuard region.
+        // See: https://worldguard.enginehub.org/en/latest/developer/regions/spatial-queries/#through-a-regionmanager
         ApplicableRegionSet set = manager.getApplicableRegions(bukkitPlayer.getBlockLocation().toVector().toBlockPoint());
 
-        // Region-Prioritization
-        ProtectedRegion finalRegion = null;
-        GameMode finalGameMode = null;
-        int highestPriority = 0;
-        for (ProtectedRegion region : set.getRegions()) {
-            GameMode flagGameMode;
-            if ((region.getPriority() > highestPriority || finalRegion == null)
-                    && (flagGameMode = region.getFlag(Flags.GAME_MODE)) != null) {
-                highestPriority = region.getPriority();
-                finalRegion = region;
-                finalGameMode = flagGameMode;
-            }
+        // See: https://worldguard.enginehub.org/en/latest/developer/regions/flag-calculation/#getting-one-value
+        LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(player);
+        GameMode gameMode = set.queryValue(localPlayer, Flags.GAME_MODE);
+        
+        if (gameMode == null) return null;
+        
+        if (gameMode.equals(GameModes.SURVIVAL)) {
+            return org.bukkit.GameMode.SURVIVAL;
+        } else if (gameMode.equals(GameModes.CREATIVE)) {
+            return org.bukkit.GameMode.CREATIVE;
+        } else if (gameMode.equals(GameModes.ADVENTURE)) {
+            return org.bukkit.GameMode.ADVENTURE;
+        } else if (gameMode.equals(GameModes.SPECTATOR)) {
+            return org.bukkit.GameMode.SPECTATOR;
         }
-
-        // No region (maybe only "__global__") with a gamemode flag found.
-        if (finalRegion == null) return null;
-
-        // Get the gamemode.
-        return org.bukkit.GameMode.valueOf(finalGameMode.getName().toUpperCase());
-
+        return null;
     }
-
-
+    
     /**
      * This method checks if the player has a bypass permission to
      * exempt him out of the gamemode update.
@@ -70,7 +75,5 @@ public class GameModeFlagScanner {
         }
         return true;
     }
-
-
-
+    
 }

@@ -29,31 +29,18 @@ public class PlayerListener implements Listener {
 	public void onPlayerJoinEvent(PlayerJoinEvent event) {
 		player = event.getPlayer();
 
-		new BukkitRunnable() {
-			public void run() {
-
-				GameMode gameMode = GameModeFlagScanner.getFinalGameMode(player);
-
-				if (gameMode != null) {
-					player.setGameMode(gameMode);
-					plugin.getLogger().info("Gamemode change in world " + player.getLocation().getWorld() + " for player " + player.getName() + ": new GameMode is now " + gameMode);
-				} else {
-					plugin.getLogger().info("No gamemode change");
-				}
-
-			}
-		}.runTaskLater(plugin, 20);
+		setGameMode();
 	}
-
 
 	@EventHandler
 	public void onPlayerChangedWorld(PlayerChangedWorldEvent event) {
 		player = event.getPlayer();
 
-		// -- old world handling
-		// ...
+		setGameMode();
+	}
+	
+	private void setGameMode() {
 
-		// -- new world handling with a start delay
 		new BukkitRunnable() {
 			public void run() {
 
@@ -68,6 +55,7 @@ public class PlayerListener implements Listener {
 
 			}
 		}.runTaskLater(plugin, 20);
+		
 	}
-
+	
 }
