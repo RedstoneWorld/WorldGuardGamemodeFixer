@@ -1,5 +1,7 @@
-package de.redstoneworld.worldguardgamemodefixer;
+package de.redstoneworld.worldguardgamemodefixer.listener;
 
+import de.redstoneworld.worldguardgamemodefixer.GameModeFlagScanner;
+import de.redstoneworld.worldguardgamemodefixer.WorldGuardGamemodeFixer;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

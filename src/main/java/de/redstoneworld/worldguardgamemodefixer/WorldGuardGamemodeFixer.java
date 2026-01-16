@@ -15,6 +15,7 @@
 package de.redstoneworld.worldguardgamemodefixer;
 
 import de.redstoneworld.worldguardgamemodefixer.listener.DebugListener;
+import de.redstoneworld.worldguardgamemodefixer.listener.PlayerListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class WorldGuardGamemodeFixer extends JavaPlugin {
