@@ -39,7 +39,7 @@ public class GameModeFlagScanner {
         BukkitPlayer bukkitPlayer = BukkitAdapter.adapt(player);
         RegionManager manager = WorldGuard.getInstance().getPlatform().getRegionContainer().get(bukkitWorld);
 
-        // Was the world of WorldGuard detect?
+        // Was the world of WorldGuard detected?
         if (manager == null) return null;
         
         // Get the set with all WorldGuard region.
