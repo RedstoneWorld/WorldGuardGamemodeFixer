@@ -60,8 +60,9 @@ public class GameModeFlagScanner {
             return org.bukkit.GameMode.ADVENTURE;
         } else if (gameMode.equals(GameModes.SPECTATOR)) {
             return org.bukkit.GameMode.SPECTATOR;
+        } else {
+            return null;
         }
-        return null;
     }
     
     /**
