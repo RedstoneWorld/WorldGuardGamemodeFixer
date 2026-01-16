@@ -31,9 +31,7 @@ public class GameModeFlagScanner {
      * @return the final bukkit gamemode
      */
     public static org.bukkit.GameMode getFinalGameMode(Player player) {
-
-        if (hasBypassPermissions(player)) return null;
-
+        
         // Get the converted bukkit objects and create the RegionManager.
         World bukkitWorld = BukkitAdapter.adapt(player.getWorld());
         BukkitPlayer bukkitPlayer = BukkitAdapter.adapt(player);
@@ -63,18 +61,6 @@ public class GameModeFlagScanner {
         } else {
             return null;
         }
-    }
-    
-    /**
-     * This method checks if the player has a bypass permission to
-     * exempt him out of the gamemode update.
-     */
-    public static boolean hasBypassPermissions(Player p) {
-
-        if (!p.hasPermission("rwm.worldguardgamemodefixer.bypass")) {
-            return false;
-        }
-        return true;
     }
     
 }

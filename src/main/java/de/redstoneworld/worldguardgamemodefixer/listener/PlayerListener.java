@@ -30,14 +30,18 @@ public class PlayerListener implements Listener {
 	@EventHandler
 	public void onPlayerJoinEvent(PlayerJoinEvent event) {
 		player = event.getPlayer();
-
+		
+		if (hasBypassPermissions(player)) return;
+		
 		setGameMode();
 	}
 
 	@EventHandler
 	public void onPlayerChangedWorld(PlayerChangedWorldEvent event) {
 		player = event.getPlayer();
-
+		
+		if (hasBypassPermissions(player)) return;
+		
 		setGameMode();
 	}
 	
@@ -59,5 +63,19 @@ public class PlayerListener implements Listener {
 		}.runTaskLater(plugin, 20);
 		
 	}
+	
+	// Permission checks:
+	
+    /**
+     * This method checks if the player has a bypass permission to
+     * exempt him out of the gamemode update.
+     */
+    public static boolean hasBypassPermissions(Player player) {
+
+        if (!player.hasPermission("rwm.worldguardgamemodefixer.bypass")) {
+            return false;
+        }
+        return true;
+    }
 	
 }
