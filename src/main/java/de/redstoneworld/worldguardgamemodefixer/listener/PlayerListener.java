@@ -50,13 +50,17 @@ public class PlayerListener implements Listener {
 		new BukkitRunnable() {
 			public void run() {
 
-				GameMode gameMode = GameModeFlagScanner.getFinalGameMode(player);
-
-				if (gameMode != null) {
-					player.setGameMode(gameMode);
-					plugin.getLogger().info("Gamemode change in world " + player.getLocation().getWorld() + " for player " + player.getName() + ": new GameMode is now " + gameMode);
+				GameMode targetGameMode = GameModeFlagScanner.getFinalGameMode(player);
+				
+				if (targetGameMode == null) return;
+				
+				if (!player.getGameMode().equals(targetGameMode)) {
+					player.setGameMode(targetGameMode);
+					plugin.getLogger().info("Gamemode change in world '" + player.getLocation().getWorld().getName() + "' for player " 
+							+ player.getName() + ". New Gamemode is now " + targetGameMode + ".");
 				} else {
-					plugin.getLogger().info("No gamemode change");
+					plugin.getLogger().info("No gamemode change in world '" + player.getLocation().getWorld().getName() + "' for player " 
+							+ player.getName() + ". Gamemode ist already " + targetGameMode + ".");
 				}
 
 			}
