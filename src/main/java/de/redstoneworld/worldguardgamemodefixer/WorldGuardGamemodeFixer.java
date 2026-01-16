@@ -14,11 +14,15 @@
 
 package de.redstoneworld.worldguardgamemodefixer;
 
+import de.redstoneworld.worldguardgamemodefixer.listener.DebugListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class WorldGuardGamemodeFixer extends JavaPlugin {
 
 	GameModeFlagScanner scanner;
+	
+	// hard-coded setting:
+	public static boolean debugMode = false;
 	
 	
 	public void onEnable() {
@@ -28,6 +32,7 @@ public class WorldGuardGamemodeFixer extends JavaPlugin {
 		
 		// register events
 		new PlayerListener(this);
+		if (debugMode) new DebugListener(this);
 		
 		// initialize the gamemode flag scanner
 		scanner = new GameModeFlagScanner(this);
