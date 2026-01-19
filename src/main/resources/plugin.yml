@@ -1,6 +1,6 @@
 name: WorldGuardGamemodeFixer
 main: de.redstoneworld.worldguardgamemodefixer.WorldGuardGamemodeFixer
-version: 1.1.1
+version: 1.2.0
 api-version: 1.20
 depend: [WorldGuard]
 description: A small plugin to update the gamemode of the player after a world change, if he is on a WorldGuard region with a separate gamemode flag.
